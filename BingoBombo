@@ -1,0 +1,40 @@
+import java.util.ArrayList;
+
+public class Bingo {
+    
+    public static void main(String[] args) {
+        
+        // Crear el bombo y el cartón de bingo
+        Bombo bombo = new Bombo();
+        CartonBingo carton = new CartonBingo();
+        
+        // Imprimir el cartón de bingo generado
+        System.out.println("Este es tu cartón de bingo:");
+        carton.imprimir();
+        
+        // Empezar la partida de bingo
+        System.out.println("¡Que empiece el bingo!");
+        boolean bingo = false;
+        ArrayList<Integer> numerosSacados = new ArrayList<Integer>();
+        
+        // Mientras no haya bingo, seguir sacando bolas del bombo
+        while (!bingo) {
+            int bola = bombo.sacarBola();
+            numerosSacados.add(bola);
+            System.out.println("Ha salido el número " + bola);
+            
+            // Comprobar si el número sacado está en el cartón
+            if (carton.contieneNumero(bola)) {
+                System.out.println("¡Tienes el número " + bola + " en tu cartón!");
+                
+                // Comprobar si el cartón está completo
+                if (carton.cartonCompleto(numerosSacados)) {
+                    bingo = true;
+                }
+            }
+        }
+        
+        // Mostrar mensaje de fin de partida
+        System.out.println("¡BINGO! Has completado el cartón en " + numerosSacados.size() + " números sacados.");
+    }
+}
